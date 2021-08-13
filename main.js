@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 let treeObj=require("./commands/view");
 let helpObj=require("./commands/help");
 let organizeObj=require("./commands/organize");

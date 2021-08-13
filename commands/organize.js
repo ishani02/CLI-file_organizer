@@ -1,6 +1,7 @@
-//1. create a directory "organized" inside random folder
-//2. check extension of each file in random folder 
-//3. copy file to destination folder
+//1. create a directory "organized" inside directory to be organized
+//2. check extension of each file in given directory 
+//3. copy file to destination directory 
+
 let fs=require("fs");
 let path=require("path");
 
@@ -11,49 +12,48 @@ let types={
     app: ['exe', 'dmg', 'pkg', "deb"]
 }
 
-function organize(inpPath){
-//create organized folder if it does not exist
-let organizedFolderPath=path.join(inpPath,"organized");
-if(fs.existsSync(organizedFolderPath)==false){
-fs.mkdirSync(organizedFolderPath);
-}
-
-//read data of input folder
-let srcContentArr=fs.readdirSync(inpPath);
-for(let i=0;i<srcContentArr.length;i++){
-    let content=srcContentArr[i];
-    let fullOriginalPath=path.join(inpPath,content);
-    if(fs.lstatSync(fullOriginalPath).isFile()==true){
-        let folderName=checkExtTellFolder(fullOriginalPath);//to get destination folder name for current file
-        copyFileToDestination(fullOriginalPath,folderName,organizedFolderPath);//copy file into destination folder
-        fs.unlinkSync(fullOriginalPath);
+function organize(inpPath) {
+  //create organized folder if it does not exist
+  let organizedFolderPath = path.join(inpPath, "organized");
+  if (fs.existsSync(organizedFolderPath) == false) {
+    fs.mkdirSync(organizedFolderPath);
+  }
+  //read data of input folder
+  let srcContentArr = fs.readdirSync(inpPath);
+  for (let i = 0; i < srcContentArr.length; i++) {
+    let content = srcContentArr[i];
+    let fullOriginalPath = path.join(inpPath, content); //path of each file in random folder
+    if (fs.lstatSync(fullOriginalPath).isFile() == true) {
+      let folderName = checkExtTellFolder(fullOriginalPath); //to get destination folder name for current file
+      copyFileToDestination(fullOriginalPath, folderName, organizedFolderPath); //copy file into destination folder
+      fs.unlinkSync(fullOriginalPath); //to delete files from random folder after sorting is completed
     }
-}
-}
-
-function checkExtTellFolder(fullPath){
-    let fileName=path.extname(fullPath);
-    let extension=fileName.split(".")[1];
-    //console.log(extension);
-    
-    for(let type in types){
-        if(types[type].includes(extension)){
-          return type;  
-        }
-      }
-   return "others"
+  }
 }
 
+function checkExtTellFolder(fullPath) {
+  //Takes path of each file and returns name of folder on the basis of extension
+  let fileName = path.extname(fullPath);
+  let extension = fileName.split(".")[1];
 
-function copyFileToDestination(fullOriginalPath,folderName,organizedFolderPath){
-    let destFolderPath=path.join(organizedFolderPath,folderName);
-    if(fs.existsSync(destFolderPath)==false){
-        fs.mkdirSync(destFolderPath);
+  for (let type in types) {
+    if (types[type].includes(extension)) {
+      return type;
     }
-    let fileName=path.basename(fullOriginalPath);
-    let destFilePath=path.join(destFolderPath,fileName);
-    fs.copyFileSync(fullOriginalPath,destFilePath);
-    console.log(fileName+" copied to "+folderName);
+  }
+  return "others";
+}
+
+function copyFileToDestination(fullOriginalPath,folderName,organizedFolderPath) {
+  //copies file to destination directory
+  let destFolderPath = path.join(organizedFolderPath, folderName); //destination path
+  if (fs.existsSync(destFolderPath) == false) {
+    fs.mkdirSync(destFolderPath);
+  }
+  let fileName = path.basename(fullOriginalPath);
+  let destFilePath = path.join(destFolderPath, fileName);
+  fs.copyFileSync(fullOriginalPath, destFilePath); //copies file
+  console.log(fileName + " copied to " + folderName);
 }
 
 module.exports={

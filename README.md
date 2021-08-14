@@ -1,7 +1,8 @@
 # CLI-file_organizer
 Organizing folders can be a tedious task (like the downloads folder on our system).This file organizer makes this job easy.Using 1 command, 
-any folder on the system (as the command has been made global)can be sorted according to the types of files.It will create a new folder of the name "organized" in the folder you want to organize and multiple folders will be created inside it to sort the files according to their extension. 
-<img width="850" alt="Screen Shot 2021-08-14 at 9 39 50 AM" src="https://user-images.githubusercontent.com/56118366/129433596-3a8d0ecb-6acb-448e-bc42-e3860d1f1d13.png">
+any folder on the system (as the command has been made global)can be sorted according to the types of files.It will create a new folder of the name "organized" in the folder you want to organize and multiple folders will be created inside it to sort the files according to their extension.      
+<img width="592" alt="Screen Shot 2021-08-14 at 9 46 55 AM" src="https://user-images.githubusercontent.com/56118366/129433703-b94e8d29-ac7d-4d31-8827-e6ff525025bb.png">
+
 <img width="173" alt="Screen Shot 2021-08-14 at 9 40 12 AM" src="https://user-images.githubusercontent.com/56118366/129433598-68db1956-6421-413a-881c-c7565b395ada.png">
 
 <b>This project will also help in viewing the contents of a folder in the form of a tree or simply line-by-line as shown below.</b>

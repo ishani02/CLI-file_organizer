@@ -29,6 +29,7 @@ function organize(inpPath) {
       fs.unlinkSync(fullOriginalPath); //to delete files from random folder after sorting is completed
     }
   }
+  console.log("\nAll files organized successfully🎊🎊")
 }
 
 function checkExtTellFolder(fullPath) {
@@ -53,7 +54,7 @@ function copyFileToDestination(fullOriginalPath,folderName,organizedFolderPath) 
   let fileName = path.basename(fullOriginalPath);
   let destFilePath = path.join(destFolderPath, fileName);
   fs.copyFileSync(fullOriginalPath, destFilePath); //copies file
-  console.log(fileName + " copied to " + folderName);
+  console.log(fileName + " added to " + folderName);
 }
 
 module.exports={
